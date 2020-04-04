@@ -1,5 +1,6 @@
 import re
 import uuid
+from dataclasses import dataclass, field
 from typing import Dict
 
 import requests
@@ -8,20 +9,16 @@ from bs4 import BeautifulSoup
 from models.model import Model
 
 
+@dataclass(eq=False)
 class Item(Model):
-    URL = 'https://www.johnlewis.com/2020-apple-ipad-pro-11-inch-a12z-bionic-ios-wi-fi-256gb' \
-          '/space-grey/p4949055'
-    TAG_NAME = 'p'
-    QUERY = {'class': 'price price--large'}
-    collection = 'items'
+    collection: str = field(init=False, default='items')
+    url: str
+    tag_name: str
+    query: Dict
+    _id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
-    def __init__(self, url: str=URL, tag_name: str=TAG_NAME, query: Dict=QUERY, _id: str = None):
-        super().__init__()
-        self.url = url
-        self.tag_name = tag_name
-        self.query = query
+    def __post_init__(self):
         self.price = None
-        self._id = _id or uuid.uuid4().hex
 
     def __repr__(self):
         return f"<Item {self.url}>"

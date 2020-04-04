@@ -1,0 +1,13 @@
+{
+  "stores": [
+    {
+      "_id": "123",
+      "name": "John Lewis",
+      "url_prefix": "https://www.johnlewis.com/",
+      "tag_name": "p",
+      "query": {
+        "class": "price price--large"
+      }
+    }
+  ]
+}

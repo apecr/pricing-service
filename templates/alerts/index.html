@@ -6,7 +6,7 @@
     <div class="list-group mb-3">
         {% for alert in alerts %}
         <div class="list-group-item">
-            <h4>Alert</h4>
+            <h4>{{alert.name}}</h4>
             <p>
                 <a href="{{alert.item.url}}">{{alert.item_id}}</a>
             </p>

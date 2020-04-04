@@ -20,7 +20,7 @@ class Alert(Model):
     def json(self) -> Dict:
         return {
             "_id": self._id,
-            "name": self.name
+            "name": self.name,
             "price_limit": self.price_limit,
             "item_id": self.item_id,
         }

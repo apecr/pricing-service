@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, url_for, redirect, session
 
 from models.alert import Alert
 from models.item import Item
@@ -9,6 +9,7 @@ alerts_blueprint = Blueprint('alerts', __name__)
 
 @alerts_blueprint.route('/')
 def show_all_alerts():
+    print(session['email'])
     alerts = Alert.all()
     return render_template('alerts/index.html', alerts=alerts)
 

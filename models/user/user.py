@@ -2,7 +2,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Dict
 
-from common.utils import Utils
+from common.utils import Utils, hash_password
 from models.model import Model
 import models.user.errors as UserErrors
 
@@ -29,7 +29,7 @@ class User(Model):
             cls.find_by_email(email)
             raise UserErrors.UserAlreadyRegisteredError('The email ypu used already exists.')
         except UserErrors.UserNotFoundError as e:
-            User(email, password).save_to_mongo()
+            User(email, hash_password(password)).save_to_mongo()
 
         return True
 

@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 
 from models.store import Store
 
@@ -24,3 +24,18 @@ def create_store():
         Store(name, url_prefix, tag_name, query).save_to_mongo()
 
     return render_template('stores/new_store.html')
+
+
+@stores_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST'])
+def update_store(store_id):
+    store = Store.get_by_id(store_id)
+    if request.method == 'POST':
+        store.name = request.form['name']
+        store.url_prefix = request.form['url_prefix']
+        store.query = json.loads(request.form['query'])
+        store.tag_name = request.form['tag_name']
+        store.save_to_mongo()
+
+        return redirect(url_for('.index'))
+
+    return render_template('stores/edit_store.html', store=store)

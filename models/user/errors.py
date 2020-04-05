@@ -19,3 +19,5 @@ class UseNotFoundError(UserError):
     pass
 
 
+class IncorrectPasswordError(UserError):
+    pass

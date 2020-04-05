@@ -2,7 +2,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Dict
 
-from common.utils import Utils, hash_password
+from common.utils import Utils, hash_password, check_hashed_password
 from models.model import Model
 import models.user.errors as UserErrors
 
@@ -17,7 +17,7 @@ class User(Model):
     @classmethod
     def find_by_email(cls, email: str) -> "User":
         try:
-            return cls.find_one_by(('email', email))
+            return cls.find_one_by('email', email)
         except TypeError:
             raise UserErrors.UserNotFoundError('A user with this email was not found')
 
@@ -31,6 +31,13 @@ class User(Model):
         except UserErrors.UserNotFoundError as e:
             User(email, hash_password(password)).save_to_mongo()
 
+        return True
+
+    @classmethod
+    def is_login_valid(cls, email: str, password: str) -> bool:
+        user = cls.find_by_email(email)
+        if not check_hashed_password(password=password, hashed_password=user.password):
+            raise UserErrors.IncorrectPasswordError('Your password is incorrect')
         return True
 
     def json(self) -> Dict:

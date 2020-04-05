@@ -38,3 +38,9 @@ def update_alert(alert_id):
         alert.save_to_mongo()
         return redirect(url_for('.show_all_alerts'))
     return render_template('alerts/edit_alert.html', alert=alert)
+
+
+@alerts_blueprint.route('/delete/<string:alert_id>')
+def delete_alert(alert_id):
+    Alert.get_by_id(alert_id).delete_from_mongo()
+    return redirect(url_for('.show_all_alerts'))

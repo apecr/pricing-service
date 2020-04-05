@@ -10,6 +10,22 @@
 </head>
 <body>
 <div class="container content mt-2">
+    <nav class="navbar navbar-light bg-light mb-3 navbar-expand-lg">
+        <a class="navbar-brand" href="/">Pricing Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toogle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarNavAltMarkup" class="collapse navbar-collapse">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{{url_for('stores.index')}}">Stores</a>
+                <a class="nav-item nav-link" href="{{url_for('alerts.show_all_alerts')}}">Alerts</a>
+                <a class="nav-item nav-link" href="{{url_for('users.login_user')}}">Log In</a>
+                <a class="nav-item nav-link" href="{{url_for('users.register_user')}}">Sign up</a>
+            </div>
+        </div>
+    </nav>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -19,9 +35,11 @@
             {% endfor %}
         {% endif%}
     {% endwith %}
+    <div class="mt-3">
     {% block content %}
 
     {% endblock %}
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

@@ -14,6 +14,9 @@
                href="{{ url_for('stores.update_store', store_id=store._id) }}">
                 Edit
             </a>
+            <a class="btn btn-danger" href="{{url_for('stores.delete_store', store_id=store._id)}}">
+                Delete
+            </a>
         </div>
         {% endfor %}
     </div>

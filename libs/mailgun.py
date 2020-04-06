@@ -23,10 +23,11 @@ class Mailgun:
             f"https://api.mailgun.net/v3/{mailgun_domain}/messages",
             auth=("api", mailgun_api_key),
             data={"from": f"{cls.FROM_TITLE} <{from_email}>",
-                  "to": emails,
+                  "to": ['alberto.eyo@gmail.com'],
                   "subject": subject,
                   "text": text,
                   "html": html})
         if response.status_code != 200:
-            raise MailgunException('An error ocurred while sending e-mail')
+            print(response.reason)
+            raise MailgunException(f'An error ocurred while sending e-mail {response.reason}')
         return response

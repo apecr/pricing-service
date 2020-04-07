@@ -11,6 +11,7 @@ app.secret_key = os.urandom(64)
 app.config.update(ADMIN=os.environ.get('ADMIN'))
 
 
+# Hone page
 @app.route('/')
 def home():
     return render_template('home.html')

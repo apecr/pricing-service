@@ -23,7 +23,7 @@ class Mailgun:
             f"https://api.mailgun.net/v3/{mailgun_domain}/messages",
             auth=("api", mailgun_api_key),
             data={"from": f"{cls.FROM_TITLE} <{from_email}>",
-                  "to": ['alberto.eyo@gmail.com'],
+                  "to": emails,
                   "subject": subject,
                   "text": text,
                   "html": html})

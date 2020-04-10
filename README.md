@@ -53,6 +53,27 @@ cd pricing-service
 pipenv install
 ```
 
+## Install MongoDB in Ubuntu
+
+```sh
+sudo apt install mongodb
+sudo systemctl status mongodb # check if the process is running
+sudo systemctl disable mongodb # to stop the service
+sudo systemctl start mongodb # to start mongodb
+sudo systemctl stop mongodb # to stop mongodb
+mongo # start the client
+```
+
+## Get the app
+
+```sh
+sudo mkdir -p /var/www/html/pricing-service
+ls -la /var/www/html/pricing-service # we see that the folder is owned by user root
+sudo chown apecr:apecr /var/www/html/pricing-service # we give apecr user and group to the folder
+cd /var/www/html/pricing-service/
+git clone https://github.com/apecr/price-of-chair-deployment
+```
+
 
 
 

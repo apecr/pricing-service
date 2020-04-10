@@ -219,7 +219,7 @@ server {
 * `sudo systemctl reload nginx`
 * `sudo systemctl start uwsgi_pricing_service`
 * We can now access to our app in the url of the server:
-![Pricing Service Home](/images/pricing-service-home.jpg?raw=true)
+![Pricing Service Home](/pricing-service-home.png?raw=true)
 
 
 

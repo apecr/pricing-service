@@ -221,5 +221,12 @@ server {
 * We can now access to our app in the url of the server:
 ![Pricing Service Home](/pricing-service-home.png?raw=true)
 
+## Creating a cron job in Ubuntu
+
+* `sudo vi /etc/crontab`. Include this line:
+`29 *    * * *   apecr   cd /var/www/html/pricing-service && /home/apecr/.local/bin/pipenv run python alert_updater.py`
+
+
+
 
 

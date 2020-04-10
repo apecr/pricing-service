@@ -180,5 +180,46 @@ spawned uWSGI worker 7 (pid: 22344, cores: 8)
 spawned uWSGI worker 8 (pid: 22387, cores: 8)
 ```
 
+## Configuring nginx
+
+* `sudo apt install nginx`
+* `sudo ufw status` --> Check the firewall (inactive at the moment)
+* `sudo ufw allow 'Nginx HTTP'`
+* `sudo ufw allow ssh` --> Allow ssh
+* `sudo ufw enable`
+* `sudo systemctl status nginx`--> se the service active already
+* `sudo vi /etc/nginx/sites-available/pricing-service.conf`
+
+```conf
+server {
+        listen 80;
+        real_ip_header X-Forwarded-For;
+        set_real_ip_from 127.0.0.1;
+        server_name localhost;
+
+        location / {
+                include uwsgi_params;
+                uwsgi_pass unix:/var/www/html/pricing-service/socket.sock;
+        }
+
+        error_page 404 /404.html;
+        location = /404.html {
+                root /usr/share/nginx/html;
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+                root /usr/share/nginx/html;
+        }
+}
+```
+
+* `sudo rm /etc/nginx/sites-enabled/default` --> delete the default
+* `sudo ln -s /etc/nginx/sites-available/pricing-service.conf /etc/nginx/sites-enabled/`
+* `sudo systemctl reload nginx`
+* `sudo systemctl start uwsgi_pricing_service`
+* We can now access to our app in the url of the server:
+![Pricing Service Home](/images/pricing-service-home.jpg?raw=true)
+
 
 

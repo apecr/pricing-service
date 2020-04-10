@@ -64,14 +64,17 @@ sudo systemctl stop mongodb # to stop mongodb
 mongo # start the client
 ```
 
-## Get the app
+## Get the app and deploy it locally
 
 ```sh
 sudo mkdir -p /var/www/html/pricing-service
 ls -la /var/www/html/pricing-service # we see that the folder is owned by user root
 sudo chown apecr:apecr /var/www/html/pricing-service # we give apecr user and group to the folder
 cd /var/www/html/pricing-service/
-git clone https://github.com/apecr/price-of-chair-deployment
+git clone https://github.com/apecr/price-of-chair-deployment .
+mkdir log
+pipenv install --python=python3.7
+pipenv run python app.py
 ```
 
 
